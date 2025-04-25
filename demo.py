@@ -1,3 +1,6 @@
+import json
+import os
+
 class Product:
     def __init__(self, pid, name, quantity, price):
         self.id = pid
@@ -5,12 +8,36 @@ class Product:
         self.quantity = quantity
         self.price = price
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "quantity": self.quantity,
+            "price": self.price
+        }
+
+    @staticmethod
+    def from_dict(data):
+        return Product(data['id'], data['name'], data['quantity'], data['price'])
+
 class Warehouse:
-    def __init__(self):
-        self.products = []
+    def __init__(self, filename='kho.json'):
+        self.filename = filename
+        self.products = self.load_data()
+
+    def load_data(self):
+        if os.path.exists(self.filename):
+            with open(self.filename, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                return [Product.from_dict(p) for p in data]
+        return []
+
+    def save_data(self):
+        with open(self.filename, 'w', encoding='utf-8') as f:
+            json.dump([p.to_dict() for p in self.products], f, indent=4, ensure_ascii=False)
 
     def exists(self, pid):
-        return any(product.id == pid for product in self.products)
+        return any(p.id == pid for p in self.products)
 
     def add_product(self, pid, name, quantity, price):
         if self.exists(pid):
@@ -112,7 +139,8 @@ def main():
             except ValueError:
                 print("Dữ liệu không hợp lệ.")
         elif choice == '0':
-            print("\nThoát chương trình...")
+            warehouse.save_data()
+            print("\nDữ liệu đã được lưu. Thoát chương trình...")
             break
         else:
             print("\nLựa chọn không hợp lệ!")
