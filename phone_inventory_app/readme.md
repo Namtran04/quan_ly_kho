@@ -90,4 +90,4 @@ phone_inventory_app/
 ## 📧 Liên hệ
 Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ qua email: tranphuongnam160804@gmail.com
 
-Chúc bạn sử dụng ứng dụng hiệu quả! 🚀
+Chúc bạn sử dụng ứng dụng hiệu quả
