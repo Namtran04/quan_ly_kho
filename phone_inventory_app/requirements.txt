@@ -1,5 +1,6 @@
-streamlit          # Framework để xây dựng giao diện
-pandas             # Xử lý dữ liệu dạng bảng
-openpyxl           # Đọc/ghi tệp Excel
-mysql-connector-python  # Kết nối và thao tác với MySQL
-bcrypt             # Mã hóa mật khẩu
+streamlit                # Framework để xây dựng giao diện
+pandas                   # Xử lý dữ liệu dạng bảng
+openpyxl                 # Đọc/ghi tệp Excel
+mysql-connector-python   # Kết nối và thao tác với MySQL
+bcrypt                   # Mã hóa mật khẩu
+plotly                   # Vẽ biểu đồ và trực quan hóa dữ liệu
