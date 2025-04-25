@@ -23,7 +23,7 @@ class Product:
 class Warehouse:
     def __init__(self, filename='kho.json'):
         self.filename = filename
-        self.products = self.load_data()
+        self.products = {}  
 
     def load_data(self):
         if os.path.exists(self.filename):
