@@ -1,5 +1,6 @@
 import json
 import os
+from openpyxl import Workbook
 
 class Product:
     def __init__(self, pid, name, quantity, price):
@@ -23,7 +24,7 @@ class Product:
 class Warehouse:
     def __init__(self, filename='kho.json'):
         self.filename = filename
-        self.products = {}  
+        self.products = self.load_data()
 
     def load_data(self):
         if os.path.exists(self.filename):
@@ -87,6 +88,21 @@ class Warehouse:
                 return
         print("\nKhông tìm thấy sản phẩm để xóa!")
 
+    def export_to_excel(self, filename='kho.xlsx'):
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "Kho hàng"
+
+        # Ghi tiêu đề
+        ws.append(["ID", "Tên sản phẩm", "Số lượng", "Giá"])
+
+        # Ghi dữ liệu
+        for p in self.products:
+            ws.append([p.id, p.name, p.quantity, p.price])
+
+        wb.save(filename)
+        print(f"\nXuất file Excel thành công: {filename}")
+
 def main():
     warehouse = Warehouse()
 
@@ -98,6 +114,7 @@ def main():
         print("4. Xuất kho")
         print("5. Tìm kiếm sản phẩm")
         print("6. Xóa sản phẩm")
+        print("7. Xuất file Excel")
         print("0. Thoát")
         choice = input("Chọn: ")
 
@@ -138,6 +155,8 @@ def main():
                 warehouse.delete_product(pid)
             except ValueError:
                 print("Dữ liệu không hợp lệ.")
+        elif choice == '7':
+            warehouse.export_to_excel()
         elif choice == '0':
             warehouse.save_data()
             print("\nDữ liệu đã được lưu. Thoát chương trình...")
