@@ -4,6 +4,7 @@
 #include<bits/stdc++.h>
 #include <unordered_map>
 #include <iomanip>
+#include <vector>
 using namespace std;
 
 class Product {
