@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <iomanip>
 #include <vector>
+#include <utility>
 using namespace std;
 
 class Product {
